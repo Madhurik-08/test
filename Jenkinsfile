@@ -11,7 +11,11 @@ pipeline {
 
         stage('Clone repository') {
             steps {
-                git credentialsId: 'github-creds-id', url: https://github.com/Madhurik-08/test, branch: 'main'
+                git(
+                    credentialsId: 'github-creds-id',
+                    url: 'https://github.com/Madhurik-08/test',
+                    branch: 'main'
+                )
             }
         }
 
