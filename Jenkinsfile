@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers { 
-        pollSCM('H/5 * * * *')
+        githubPush()
     }
     stages {
         stage('Check Windows Version') {
