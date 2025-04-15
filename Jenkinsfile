@@ -10,7 +10,6 @@ pipeline {
                 bat 'echo Current directory is: && cd'
             }
         }
-
         stage('Clone repository') {
             steps {
                 git(
