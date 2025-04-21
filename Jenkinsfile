@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    
     environment {
         DOCKER_IMAGE = "sample-node-app"
         DOCKER_TAG = "latest"
