@@ -1,35 +1,37 @@
 pipeline {
     agent any
-    triggers { 
-        githubPush()
+
+    environment {
+        DOCKER_IMAGE = "sample-node-app"
+        DOCKER_TAG = "latest"
     }
+
     stages {
-        stage('Check Windows Version') {
+        stage('Checkout') {
             steps {
-                bat 'ver'
-                bat 'echo Current directory is: && cd'
-            }
-        }
-        stage('Clone repository') {
-            steps {
-                git(
-                    credentialsId: 'github-creds-id',
-                    url: 'https://github.com/Madhurik-08/test',
-                    branch: 'main'
-                )
+                git 'https://github.com/your-repo/sample-node-app.git' 
             }
         }
 
-        stage('List repository contents') {
+        stage('Install Dependencies') {
             steps {
-                bat 'dir'
+                sh 'npm install'
             }
         }
 
-        stage('Execute commands.bat') {
+        stage('Build Docker Image') {
             steps {
-                bat 'call commands.bat'
-           }
-         }
+                script {
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                }
+            }
+        }
+
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
     }
 }
