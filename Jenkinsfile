@@ -12,7 +12,7 @@ pipeline {
                 git 'https://github.com/Madhurik-08/test' 
             }
         }
-        
+    
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
